@@ -1,0 +1,411 @@
+{
+  "base_experience": 163,
+  "id": 82,
+  "moves": [
+    {
+      "move": {
+        "name": "tackle",
+        "url": "https://pokeapi.co/api/v2/move/33/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "take-down",
+        "url": "https://pokeapi.co/api/v2/move/36/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "double-edge",
+        "url": "https://pokeapi.co/api/v2/move/38/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "supersonic",
+        "url": "https://pokeapi.co/api/v2/move/48/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 29,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "sonic-boom",
+        "url": "https://pokeapi.co/api/v2/move/49/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        },
+        {
+          "level_learned_at": 21,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "sonic-boom",
+        "url": "https://pokeapi.co/api/v2/move/49/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        },
+        {
+          "level_learned_at": 21,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "hyper-beam",
+        "url": "https://pokeapi.co/api/v2/move/63/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "thunder-shock",
+        "url": "https://pokeapi.co/api/v2/move/84/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        },
+        {
+          "level_learned_at": 25,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "thunder-shock",
+        "url": "https://pokeapi.co/api/v2/move/84/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        },
+        {
+          "level_learned_at": 25,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "thunderbolt",
+        "url": "https://pokeapi.co/api/v2/move/85/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "thunder-wave",
+        "url": "https://pokeapi.co/api/v2/move/86/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 38,
+          "move_learn_method": "level-up"
+        },
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "thunder-wave",
+        "url": "https://pokeapi.co/api/v2/move/86/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 38,
+          "move_learn_method": "level-up"
+        },
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "thunder",
+        "url": "https://pokeapi.co/api/v2/move/87/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "toxic",
+        "url": "https://pokeapi.co/api/v2/move/92/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "rage",
+        "url": "https://pokeapi.co/api/v2/move/99/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "teleport",
+        "url": "https://pokeapi.co/api/v2/move/100/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "mimic",
+        "url": "https://pokeapi.co/api/v2/move/102/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "screech",
+        "url": "https://pokeapi.co/api/v2/move/103/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 54,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "double-team",
+        "url": "https://pokeapi.co/api/v2/move/104/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "reflect",
+        "url": "https://pokeapi.co/api/v2/move/115/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "bide",
+        "url": "https://pokeapi.co/api/v2/move/117/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "swift",
+        "url": "https://pokeapi.co/api/v2/move/129/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 46,
+          "move_learn_method": "level-up"
+        },
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "swift",
+        "url": "https://pokeapi.co/api/v2/move/129/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 46,
+          "move_learn_method": "level-up"
+        },
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "flash",
+        "url": "https://pokeapi.co/api/v2/move/148/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "rest",
+        "url": "https://pokeapi.co/api/v2/move/156/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "substitute",
+        "url": "https://pokeapi.co/api/v2/move/164/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    }
+  ],
+  "name": "magneton",
+  "order": 125,
+  "species": {
+    "capture_rate": 60,
+    "evolution_chain": {
+      "url": "https://pokeapi.co/api/v2/evolution-chain/34/"
+    },
+    "growth_rate": {
+      "name": "medium",
+      "url": "https://pokeapi.co/api/v2/growth-rate/2/"
+    },
+    "habitat": {
+      "name": "rough-terrain",
+      "url": "https://pokeapi.co/api/v2/pokemon-habitat/6/"
+    },
+    "id": 82,
+    "is_legendary": false,
+    "is_mythical": false
+  },
+  "stats": [
+    {
+      "base_stat": 50,
+      "effort": 0,
+      "stat": "hp"
+    },
+    {
+      "base_stat": 60,
+      "effort": 0,
+      "stat": "attack"
+    },
+    {
+      "base_stat": 95,
+      "effort": 0,
+      "stat": "defense"
+    },
+    {
+      "base_stat": 120,
+      "effort": 2,
+      "stat": "special-attack"
+    },
+    {
+      "base_stat": 70,
+      "effort": 0,
+      "stat": "special-defense"
+    },
+    {
+      "base_stat": 70,
+      "effort": 0,
+      "stat": "speed"
+    }
+  ],
+  "types": [
+    {
+      "slot": 1,
+      "type": "electric"
+    },
+    {
+      "slot": 2,
+      "type": "steel"
+    }
+  ]
+}

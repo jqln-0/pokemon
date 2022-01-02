@@ -1,0 +1,26 @@
+{
+  "accuracy": 100,
+  "damage_class": "physical",
+  "id": 7,
+  "meta": {
+    "ailment": "burn",
+    "ailment_chance": 10,
+    "category": "damage+ailment",
+    "crit_rate": 0,
+    "drain": 0,
+    "flinch_chance": 0,
+    "healing": 0,
+    "max_hits": null,
+    "max_turns": null,
+    "min_hits": null,
+    "min_turns": null,
+    "stat_chance": 0
+  },
+  "name": "fire-punch",
+  "power": 75,
+  "pp": 15,
+  "priority": 0,
+  "stat_changes": [],
+  "target": "selected-pokemon",
+  "type": "fire"
+}

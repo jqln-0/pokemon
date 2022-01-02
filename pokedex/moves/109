@@ -1,0 +1,26 @@
+{
+  "accuracy": 100,
+  "damage_class": "status",
+  "id": 109,
+  "meta": {
+    "ailment": "confusion",
+    "ailment_chance": 0,
+    "category": "ailment",
+    "crit_rate": 0,
+    "drain": 0,
+    "flinch_chance": 0,
+    "healing": 0,
+    "max_hits": null,
+    "max_turns": 5,
+    "min_hits": null,
+    "min_turns": 2,
+    "stat_chance": 0
+  },
+  "name": "confuse-ray",
+  "power": null,
+  "pp": 10,
+  "priority": 0,
+  "stat_changes": [],
+  "target": "selected-pokemon",
+  "type": "ghost"
+}

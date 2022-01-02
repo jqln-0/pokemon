@@ -1,0 +1,91 @@
+{
+  "base_experience": 39,
+  "id": 13,
+  "moves": [
+    {
+      "move": {
+        "name": "poison-sting",
+        "url": "https://pokeapi.co/api/v2/move/40/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "string-shot",
+        "url": "https://pokeapi.co/api/v2/move/81/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        }
+      ]
+    }
+  ],
+  "name": "weedle",
+  "order": 17,
+  "species": {
+    "capture_rate": 255,
+    "evolution_chain": {
+      "url": "https://pokeapi.co/api/v2/evolution-chain/5/"
+    },
+    "growth_rate": {
+      "name": "medium",
+      "url": "https://pokeapi.co/api/v2/growth-rate/2/"
+    },
+    "habitat": {
+      "name": "forest",
+      "url": "https://pokeapi.co/api/v2/pokemon-habitat/2/"
+    },
+    "id": 13,
+    "is_legendary": false,
+    "is_mythical": false
+  },
+  "stats": [
+    {
+      "base_stat": 40,
+      "effort": 0,
+      "stat": "hp"
+    },
+    {
+      "base_stat": 35,
+      "effort": 0,
+      "stat": "attack"
+    },
+    {
+      "base_stat": 30,
+      "effort": 0,
+      "stat": "defense"
+    },
+    {
+      "base_stat": 20,
+      "effort": 0,
+      "stat": "special-attack"
+    },
+    {
+      "base_stat": 20,
+      "effort": 0,
+      "stat": "special-defense"
+    },
+    {
+      "base_stat": 50,
+      "effort": 1,
+      "stat": "speed"
+    }
+  ],
+  "types": [
+    {
+      "slot": 1,
+      "type": "bug"
+    },
+    {
+      "slot": 2,
+      "type": "poison"
+    }
+  ]
+}

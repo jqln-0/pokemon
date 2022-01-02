@@ -1,0 +1,26 @@
+{
+  "accuracy": null,
+  "damage_class": "physical",
+  "id": 117,
+  "meta": {
+    "ailment": "none",
+    "ailment_chance": 0,
+    "category": "damage",
+    "crit_rate": 0,
+    "drain": 0,
+    "flinch_chance": 0,
+    "healing": 0,
+    "max_hits": null,
+    "max_turns": null,
+    "min_hits": null,
+    "min_turns": null,
+    "stat_chance": 0
+  },
+  "name": "bide",
+  "power": null,
+  "pp": 10,
+  "priority": 1,
+  "stat_changes": [],
+  "target": "user",
+  "type": "normal"
+}

@@ -1,0 +1,26 @@
+{
+  "accuracy": 100,
+  "damage_class": "status",
+  "id": 50,
+  "meta": {
+    "ailment": "disable",
+    "ailment_chance": 0,
+    "category": "unique",
+    "crit_rate": 0,
+    "drain": 0,
+    "flinch_chance": 0,
+    "healing": 0,
+    "max_hits": null,
+    "max_turns": 4,
+    "min_hits": null,
+    "min_turns": 4,
+    "stat_chance": 0
+  },
+  "name": "disable",
+  "power": null,
+  "pp": 20,
+  "priority": 0,
+  "stat_changes": [],
+  "target": "selected-pokemon",
+  "type": "normal"
+}

@@ -1,0 +1,26 @@
+{
+  "accuracy": 60,
+  "damage_class": "status",
+  "id": 95,
+  "meta": {
+    "ailment": "sleep",
+    "ailment_chance": 0,
+    "category": "ailment",
+    "crit_rate": 0,
+    "drain": 0,
+    "flinch_chance": 0,
+    "healing": 0,
+    "max_hits": null,
+    "max_turns": 4,
+    "min_hits": null,
+    "min_turns": 2,
+    "stat_chance": 0
+  },
+  "name": "hypnosis",
+  "power": null,
+  "pp": 20,
+  "priority": 0,
+  "stat_changes": [],
+  "target": "selected-pokemon",
+  "type": "psychic"
+}

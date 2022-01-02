@@ -1,0 +1,26 @@
+{
+  "accuracy": null,
+  "damage_class": "status",
+  "id": 135,
+  "meta": {
+    "ailment": "none",
+    "ailment_chance": 0,
+    "category": "heal",
+    "crit_rate": 0,
+    "drain": 0,
+    "flinch_chance": 0,
+    "healing": 50,
+    "max_hits": null,
+    "max_turns": null,
+    "min_hits": null,
+    "min_turns": null,
+    "stat_chance": 0
+  },
+  "name": "soft-boiled",
+  "power": null,
+  "pp": 10,
+  "priority": 0,
+  "stat_changes": [],
+  "target": "user",
+  "type": "normal"
+}

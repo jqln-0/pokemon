@@ -1,0 +1,26 @@
+{
+  "accuracy": 90,
+  "damage_class": "physical",
+  "id": 143,
+  "meta": {
+    "ailment": "none",
+    "ailment_chance": 0,
+    "category": "damage",
+    "crit_rate": 1,
+    "drain": 0,
+    "flinch_chance": 30,
+    "healing": 0,
+    "max_hits": null,
+    "max_turns": null,
+    "min_hits": null,
+    "min_turns": null,
+    "stat_chance": 0
+  },
+  "name": "sky-attack",
+  "power": 140,
+  "pp": 5,
+  "priority": 0,
+  "stat_changes": [],
+  "target": "selected-pokemon",
+  "type": "flying"
+}

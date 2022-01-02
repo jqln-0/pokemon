@@ -1,0 +1,359 @@
+{
+  "base_experience": 55,
+  "id": 32,
+  "moves": [
+    {
+      "move": {
+        "name": "double-kick",
+        "url": "https://pokeapi.co/api/v2/move/24/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 43,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "horn-attack",
+        "url": "https://pokeapi.co/api/v2/move/30/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 8,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "fury-attack",
+        "url": "https://pokeapi.co/api/v2/move/31/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 29,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "horn-drill",
+        "url": "https://pokeapi.co/api/v2/move/32/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 36,
+          "move_learn_method": "level-up"
+        },
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "horn-drill",
+        "url": "https://pokeapi.co/api/v2/move/32/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 36,
+          "move_learn_method": "level-up"
+        },
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "tackle",
+        "url": "https://pokeapi.co/api/v2/move/33/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "body-slam",
+        "url": "https://pokeapi.co/api/v2/move/34/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "take-down",
+        "url": "https://pokeapi.co/api/v2/move/36/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "double-edge",
+        "url": "https://pokeapi.co/api/v2/move/38/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "poison-sting",
+        "url": "https://pokeapi.co/api/v2/move/40/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 14,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "leer",
+        "url": "https://pokeapi.co/api/v2/move/43/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "blizzard",
+        "url": "https://pokeapi.co/api/v2/move/59/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "thunderbolt",
+        "url": "https://pokeapi.co/api/v2/move/85/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "thunder",
+        "url": "https://pokeapi.co/api/v2/move/87/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "toxic",
+        "url": "https://pokeapi.co/api/v2/move/92/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "rage",
+        "url": "https://pokeapi.co/api/v2/move/99/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "mimic",
+        "url": "https://pokeapi.co/api/v2/move/102/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "double-team",
+        "url": "https://pokeapi.co/api/v2/move/104/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "reflect",
+        "url": "https://pokeapi.co/api/v2/move/115/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "focus-energy",
+        "url": "https://pokeapi.co/api/v2/move/116/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 21,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "bide",
+        "url": "https://pokeapi.co/api/v2/move/117/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "skull-bash",
+        "url": "https://pokeapi.co/api/v2/move/130/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "rest",
+        "url": "https://pokeapi.co/api/v2/move/156/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "substitute",
+        "url": "https://pokeapi.co/api/v2/move/164/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "move_learn_method": "machine"
+        }
+      ]
+    }
+  ],
+  "name": "nidoran-m",
+  "order": 58,
+  "species": {
+    "capture_rate": 235,
+    "evolution_chain": {
+      "url": "https://pokeapi.co/api/v2/evolution-chain/13/"
+    },
+    "growth_rate": {
+      "name": "medium-slow",
+      "url": "https://pokeapi.co/api/v2/growth-rate/4/"
+    },
+    "habitat": {
+      "name": "grassland",
+      "url": "https://pokeapi.co/api/v2/pokemon-habitat/3/"
+    },
+    "id": 32,
+    "is_legendary": false,
+    "is_mythical": false
+  },
+  "stats": [
+    {
+      "base_stat": 46,
+      "effort": 0,
+      "stat": "hp"
+    },
+    {
+      "base_stat": 57,
+      "effort": 1,
+      "stat": "attack"
+    },
+    {
+      "base_stat": 40,
+      "effort": 0,
+      "stat": "defense"
+    },
+    {
+      "base_stat": 40,
+      "effort": 0,
+      "stat": "special-attack"
+    },
+    {
+      "base_stat": 40,
+      "effort": 0,
+      "stat": "special-defense"
+    },
+    {
+      "base_stat": 50,
+      "effort": 0,
+      "stat": "speed"
+    }
+  ],
+  "types": [
+    {
+      "slot": 1,
+      "type": "poison"
+    }
+  ]
+}

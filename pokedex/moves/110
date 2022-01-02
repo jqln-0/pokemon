@@ -1,0 +1,34 @@
+{
+  "accuracy": null,
+  "damage_class": "status",
+  "id": 110,
+  "meta": {
+    "ailment": "none",
+    "ailment_chance": 0,
+    "category": "net-good-stats",
+    "crit_rate": 0,
+    "drain": 0,
+    "flinch_chance": 0,
+    "healing": 0,
+    "max_hits": null,
+    "max_turns": null,
+    "min_hits": null,
+    "min_turns": null,
+    "stat_chance": 0
+  },
+  "name": "withdraw",
+  "power": null,
+  "pp": 40,
+  "priority": 0,
+  "stat_changes": [
+    {
+      "change": 1,
+      "stat": {
+        "name": "defense",
+        "url": "https://pokeapi.co/api/v2/stat/3/"
+      }
+    }
+  ],
+  "target": "user",
+  "type": "water"
+}

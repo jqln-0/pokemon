@@ -1,0 +1,79 @@
+{
+  "base_experience": 72,
+  "id": 14,
+  "moves": [
+    {
+      "move": {
+        "name": "harden",
+        "url": "https://pokeapi.co/api/v2/move/106/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        }
+      ]
+    }
+  ],
+  "name": "kakuna",
+  "order": 18,
+  "species": {
+    "capture_rate": 120,
+    "evolution_chain": {
+      "url": "https://pokeapi.co/api/v2/evolution-chain/5/"
+    },
+    "growth_rate": {
+      "name": "medium",
+      "url": "https://pokeapi.co/api/v2/growth-rate/2/"
+    },
+    "habitat": {
+      "name": "forest",
+      "url": "https://pokeapi.co/api/v2/pokemon-habitat/2/"
+    },
+    "id": 14,
+    "is_legendary": false,
+    "is_mythical": false
+  },
+  "stats": [
+    {
+      "base_stat": 45,
+      "effort": 0,
+      "stat": "hp"
+    },
+    {
+      "base_stat": 25,
+      "effort": 0,
+      "stat": "attack"
+    },
+    {
+      "base_stat": 50,
+      "effort": 2,
+      "stat": "defense"
+    },
+    {
+      "base_stat": 25,
+      "effort": 0,
+      "stat": "special-attack"
+    },
+    {
+      "base_stat": 25,
+      "effort": 0,
+      "stat": "special-defense"
+    },
+    {
+      "base_stat": 35,
+      "effort": 0,
+      "stat": "speed"
+    }
+  ],
+  "types": [
+    {
+      "slot": 1,
+      "type": "bug"
+    },
+    {
+      "slot": 2,
+      "type": "poison"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "accuracy": 90,
+  "damage_class": "physical",
+  "id": 35,
+  "meta": {
+    "ailment": "trap",
+    "ailment_chance": 100,
+    "category": "damage+ailment",
+    "crit_rate": 0,
+    "drain": 0,
+    "flinch_chance": 0,
+    "healing": 0,
+    "max_hits": null,
+    "max_turns": 6,
+    "min_hits": null,
+    "min_turns": 5,
+    "stat_chance": 0
+  },
+  "name": "wrap",
+  "power": 15,
+  "pp": 20,
+  "priority": 0,
+  "stat_changes": [],
+  "target": "selected-pokemon",
+  "type": "normal"
+}

@@ -1,0 +1,33 @@
+[package]
+name = "pokemon"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
+embedded-graphics = "0.6.2"
+embedded-picofont = "0.2.1"
+embedded-text = "0.4.1"
+embedded-layout = "0.1.0"
+tinybmp = {version = "0.2.3", features = ["graphics"]}
+
+[target.'cfg(unix)'.dependencies]
+embedded-graphics-simulator = "0.2.1"
+
+[target.'cfg(all(target_arch = "xtensa", target_os = "none"))'.dependencies]
+esp8266-hal = "0.5.0"
+bitbang-hal = "0.3.2"
+sh1106 = "0.3.4"
+panic-halt = "0.2.0"
+nb = "1.0.0"
+
+[profile.dev]
+lto = true
+incremental = false
+debug = false # debug adds frame pointers - which must be omitted
+codegen-units = 1
+
+[profile.release]
+lto = true
+incremental = false
+debug = false # debug adds frame pointers - which must be omitted
+codegen-units = 1

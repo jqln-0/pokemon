@@ -1,0 +1,6 @@
+[target.'cfg(all(target_arch = "xtensa", target_os = "none"))']
+runner = "espflash /dev/ttyUSB0"
+rustflags = [
+  "-C", "link-arg=-nostartfiles",
+  "-C", "link-arg=-Wl,-Tlink.x",
+]

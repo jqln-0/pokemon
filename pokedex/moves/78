@@ -1,0 +1,26 @@
+{
+  "accuracy": 75,
+  "damage_class": "status",
+  "id": 78,
+  "meta": {
+    "ailment": "paralysis",
+    "ailment_chance": 0,
+    "category": "ailment",
+    "crit_rate": 0,
+    "drain": 0,
+    "flinch_chance": 0,
+    "healing": 0,
+    "max_hits": null,
+    "max_turns": null,
+    "min_hits": null,
+    "min_turns": null,
+    "stat_chance": 0
+  },
+  "name": "stun-spore",
+  "power": null,
+  "pp": 30,
+  "priority": 0,
+  "stat_changes": [],
+  "target": "selected-pokemon",
+  "type": "grass"
+}

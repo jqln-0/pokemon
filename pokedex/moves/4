@@ -1,0 +1,26 @@
+{
+  "accuracy": 85,
+  "damage_class": "physical",
+  "id": 4,
+  "meta": {
+    "ailment": "none",
+    "ailment_chance": 0,
+    "category": "damage",
+    "crit_rate": 0,
+    "drain": 0,
+    "flinch_chance": 0,
+    "healing": 0,
+    "max_hits": 5,
+    "max_turns": null,
+    "min_hits": 2,
+    "min_turns": null,
+    "stat_chance": 0
+  },
+  "name": "comet-punch",
+  "power": 18,
+  "pp": 15,
+  "priority": 0,
+  "stat_changes": [],
+  "target": "selected-pokemon",
+  "type": "normal"
+}

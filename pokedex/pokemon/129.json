@@ -1,0 +1,87 @@
+{
+  "base_experience": 40,
+  "id": 129,
+  "moves": [
+    {
+      "move": {
+        "name": "tackle",
+        "url": "https://pokeapi.co/api/v2/move/33/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 15,
+          "move_learn_method": "level-up"
+        }
+      ]
+    },
+    {
+      "move": {
+        "name": "splash",
+        "url": "https://pokeapi.co/api/v2/move/150/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        }
+      ]
+    }
+  ],
+  "name": "magikarp",
+  "order": 199,
+  "species": {
+    "capture_rate": 255,
+    "evolution_chain": {
+      "url": "https://pokeapi.co/api/v2/evolution-chain/64/"
+    },
+    "growth_rate": {
+      "name": "slow",
+      "url": "https://pokeapi.co/api/v2/growth-rate/1/"
+    },
+    "habitat": {
+      "name": "waters-edge",
+      "url": "https://pokeapi.co/api/v2/pokemon-habitat/9/"
+    },
+    "id": 129,
+    "is_legendary": false,
+    "is_mythical": false
+  },
+  "stats": [
+    {
+      "base_stat": 20,
+      "effort": 0,
+      "stat": "hp"
+    },
+    {
+      "base_stat": 10,
+      "effort": 0,
+      "stat": "attack"
+    },
+    {
+      "base_stat": 55,
+      "effort": 0,
+      "stat": "defense"
+    },
+    {
+      "base_stat": 15,
+      "effort": 0,
+      "stat": "special-attack"
+    },
+    {
+      "base_stat": 20,
+      "effort": 0,
+      "stat": "special-defense"
+    },
+    {
+      "base_stat": 80,
+      "effort": 1,
+      "stat": "speed"
+    }
+  ],
+  "types": [
+    {
+      "slot": 1,
+      "type": "water"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+esp-bin/
+rust-build/
+target/
+sprites/
+Cargo.lock
+**/*.rs.bk

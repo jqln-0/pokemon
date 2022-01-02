@@ -1,0 +1,75 @@
+{
+  "base_experience": 101,
+  "id": 132,
+  "moves": [
+    {
+      "move": {
+        "name": "transform",
+        "url": "https://pokeapi.co/api/v2/move/144/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 1,
+          "move_learn_method": "level-up"
+        }
+      ]
+    }
+  ],
+  "name": "ditto",
+  "order": 203,
+  "species": {
+    "capture_rate": 35,
+    "evolution_chain": {
+      "url": "https://pokeapi.co/api/v2/evolution-chain/66/"
+    },
+    "growth_rate": {
+      "name": "medium",
+      "url": "https://pokeapi.co/api/v2/growth-rate/2/"
+    },
+    "habitat": {
+      "name": "urban",
+      "url": "https://pokeapi.co/api/v2/pokemon-habitat/8/"
+    },
+    "id": 132,
+    "is_legendary": false,
+    "is_mythical": false
+  },
+  "stats": [
+    {
+      "base_stat": 48,
+      "effort": 1,
+      "stat": "hp"
+    },
+    {
+      "base_stat": 48,
+      "effort": 0,
+      "stat": "attack"
+    },
+    {
+      "base_stat": 48,
+      "effort": 0,
+      "stat": "defense"
+    },
+    {
+      "base_stat": 48,
+      "effort": 0,
+      "stat": "special-attack"
+    },
+    {
+      "base_stat": 48,
+      "effort": 0,
+      "stat": "special-defense"
+    },
+    {
+      "base_stat": 48,
+      "effort": 0,
+      "stat": "speed"
+    }
+  ],
+  "types": [
+    {
+      "slot": 1,
+      "type": "normal"
+    }
+  ]
+}

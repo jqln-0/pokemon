@@ -1,0 +1,26 @@
+{
+  "accuracy": null,
+  "damage_class": "status",
+  "id": 113,
+  "meta": {
+    "ailment": "none",
+    "ailment_chance": 0,
+    "category": "field-effect",
+    "crit_rate": 0,
+    "drain": 0,
+    "flinch_chance": 0,
+    "healing": 0,
+    "max_hits": null,
+    "max_turns": null,
+    "min_hits": null,
+    "min_turns": null,
+    "stat_chance": 0
+  },
+  "name": "light-screen",
+  "power": null,
+  "pp": 30,
+  "priority": 0,
+  "stat_changes": [],
+  "target": "users-field",
+  "type": "psychic"
+}
