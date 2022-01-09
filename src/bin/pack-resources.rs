@@ -35,7 +35,7 @@ fn main() {
         };
         let bmp_filename = json_filename.with_extension("bmp");
 
-        println!("processing {:?} and {:?}", json_filename, bmp_filename);
+        print!("\rprocessing {:?} and {:?}     ", json_filename, bmp_filename);
         let mut bmp_file = File::open(bmp_filename).unwrap();
         let mut buffer = [0u8; 578];
         bmp_file.read_exact(&mut buffer).unwrap();
@@ -49,6 +49,7 @@ fn main() {
         cbor_writer.write(pokemon).unwrap();
         cbor_writer.write(move_list).unwrap();
     }
+    println!();
 
     println!("wrote all pokemon!");
 }
