@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::fs::read_dir;
 use std::{env, fs::File};
 use std::io::{prelude::*, BufReader, BufWriter};
 use minicbor::bytes::ByteArray;
@@ -6,44 +7,58 @@ use minicbor_io::Writer;
 use pokemon::pokedex::{self, Pokemon, Type, StatData, MoveListChunk, Move, LearnableMove, LearnCondition};
 use serde_json::Value;
 
+#[derive(Debug)]
+struct ParseError(String);
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
     if args.len() != 3 {
-        println!("usage: {} <path-to-pokemon> <output>", args[0]);
+        println!("usage: {} <path-to-pokemon-dir> <output-file>", args[0]);
         return;
     }
 
-    println!("you provided {}", args[1]);
-
-    let mut bmp_file = File::open(format!("{}.bmp", args[1])).unwrap();
-    let mut buffer = [0u8; 578];
-    bmp_file.read_exact(&mut buffer).unwrap();
-
-    let json_file = File::open(format!("{}.json", args[1])).unwrap();
-    let json: Value = serde_json::from_reader(BufReader::new(json_file)).unwrap();
-
-    let pokemon = parse_pokemon(&json, &buffer).unwrap();
-    println!("created pokemon {:?}", pokemon);
-    let move_list = parse_movelist(&json["moves"]).unwrap();
-    println!("created movelist {:?}", move_list);
-
     let output_file = BufWriter::new(File::create(&args[2]).unwrap());
     let mut cbor_writer = Writer::new(output_file);
-    let mut outsize = cbor_writer.write(pokemon).unwrap();
-    outsize += cbor_writer.write(move_list).unwrap();
 
-    println!("wrote to file. final size was {} bytes", outsize);
+    let files = read_dir(&args[1]).unwrap();
+    for f in files {
+        let path = match f.ok().map(|f| f.path()) {
+            Some(p) => p,
+            None => continue
+        };
+        let json_filename = match path.extension().and_then(|ext| ext.to_str()) {
+            Some("json") => path,
+            _ => continue
+        };
+        let bmp_filename = json_filename.with_extension("bmp");
+
+        println!("processing {:?} and {:?}", json_filename, bmp_filename);
+        let mut bmp_file = File::open(bmp_filename).unwrap();
+        let mut buffer = [0u8; 578];
+        bmp_file.read_exact(&mut buffer).unwrap();
+
+        let json_file = File::open(json_filename).unwrap();
+        let json: Value = serde_json::from_reader(BufReader::new(json_file)).unwrap();
+
+        let pokemon = parse_pokemon(&json, &buffer).unwrap();
+        let move_list = parse_movelist(&json["moves"]).unwrap();
+
+        cbor_writer.write(pokemon).unwrap();
+        cbor_writer.write(move_list).unwrap();
+    }
+
+    println!("wrote all pokemon!");
 }
 
-fn parse_movelist(json: &Value) -> Result<Vec<MoveListChunk>, &'static str> {
+fn parse_movelist(json: &Value) -> Result<Vec<MoveListChunk>, ParseError> {
     let mut all_chunks = Vec::new();
     let mut current_chunk: [Option<LearnableMove>; 16] = [None; 16];
     let mut current_chunk_i = 0;
     for m in json.as_array().unwrap_or(&Vec::new()) {
         let parsed = match parse_learnable_move(m) {
             Ok(p) => p,
-            Err(e) => return Err(e)
+            Err(e) => return Err(ParseError(format!("failed to parse move: {:?}", e)))
         };
         for i in parsed {
             if current_chunk_i == 16 {
@@ -62,7 +77,7 @@ fn parse_movelist(json: &Value) -> Result<Vec<MoveListChunk>, &'static str> {
 
     // Double check that we actually got results
     if current_chunk_i == 0 && all_chunks.len() == 0 {
-        return Err("found no moves");
+        return Err(ParseError("no moves in movelist".to_string()));
     }
 
     // Finish the final chunk.
@@ -74,14 +89,14 @@ fn parse_movelist(json: &Value) -> Result<Vec<MoveListChunk>, &'static str> {
     return Ok(all_chunks);
 }
 
-fn parse_learnable_move(json: &Value) -> Result<Vec<LearnableMove>, &'static str> {
+fn parse_learnable_move(json: &Value) -> Result<Vec<LearnableMove>, ParseError> {
     let parts: Vec<&str> = match json["move"]["url"].as_str() {
         Some(i) => i.split("/").collect(),
-        None => return Err("move missing id")
+        None => return Err(ParseError("missing move id".to_string()))
     };
     let id: u16 = match parts[parts.len() - 2].parse() {
         Ok(i) => i,
-        Err(_) => return Err("failed to parse id")
+        Err(e) => return Err(ParseError(format!("failed to parse id: {}", e)))
     };
     let mut moves = Vec::new();
     for method in json["version_group_details"].as_array().unwrap_or(&Vec::new()) {
@@ -91,17 +106,17 @@ fn parse_learnable_move(json: &Value) -> Result<Vec<LearnableMove>, &'static str
                 Some("level-up") => LearnCondition::LevelUp{
                     level: match method["level_learned_at"].as_u64().map(|i| u8::try_from(i).ok()).flatten() {
                         Some(l) => l,
-                        None => return Err("failed to parse level up method")
+                        None => return Err(ParseError("missing or malformed level up method".to_string()))
                     }
                 },
                 Some("machine") => LearnCondition::Machine,
-                Some(_) => return Err("unknown learn method"),
-                None => return Err("missing learn method")
+                Some(m) => return Err(ParseError(format!("unknown learn method {}", m))),
+                None => return Err(ParseError("missing learn method".to_string()))
             }
         })
     }
     return match moves.len() {
-        0 => Err("move with no learn methods"),
+        0 => Err(ParseError("move had no learn methods".to_string())),
         _ => Ok(moves)
     }
 }
