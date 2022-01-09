@@ -88,18 +88,6 @@
     },
     {
       "move": {
-        "name": "surf",
-        "url": "https://pokeapi.co/api/v2/move/57/"
-      },
-      "version_group_details": [
-        {
-          "level_learned_at": 0,
-          "move_learn_method": "stadium-surfing-pikachu"
-        }
-      ]
-    },
-    {
-      "move": {
         "name": "submission",
         "url": "https://pokeapi.co/api/v2/move/66/"
       },
