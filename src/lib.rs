@@ -12,9 +12,15 @@ pub mod pokedex {
 
         #[n(4)] pub capture_rate: u8,
         #[n(5)] pub base_experience: u8,
-        #[n(6)] pub stats: [Stats; 6],
 
-        #[b(7)] pub sprite: ByteArray<578>,
+        #[n(7)] pub hp: StatData,
+        #[n(8)] pub attack: StatData,
+        #[n(9)] pub defense: StatData,
+        #[n(10)] pub special_attack: StatData,
+        #[n(11)] pub special_defense: StatData,
+        #[n(12)] pub speed: StatData,
+
+        #[b(13)] pub sprite: ByteArray<578>,
     }
 
     #[derive(Encode, Decode, Debug)]
@@ -28,10 +34,9 @@ pub mod pokedex {
         #[n(5)] Speed,
     }
 
-    #[derive(Encode, Decode, Debug)]
-    pub struct Stats {
-        #[n(0)] stat: Stat,
-        #[n(1)] base_value: u16,
+    #[derive(Encode, Decode, Debug, Clone, Copy)]
+    pub struct StatData {
+        #[n(1)] pub base_value: u16,
     }
 
     // These could be created dynamically from the JSON data. This isn't so bad
@@ -61,17 +66,17 @@ pub mod pokedex {
 
     #[derive(Encode, Decode, Debug)]
     pub struct MoveListChunk {
-        #[n(0)] is_final_chunk: bool,
-        #[n(1)] moves: [Option<LearnableMove>; 16],
+        #[n(0)] pub is_final_chunk: bool,
+        #[n(1)] pub moves: [Option<LearnableMove>; 16],
     }
 
-    #[derive(Encode, Decode, Debug)]
+    #[derive(Encode, Decode, Debug, Copy, Clone)]
     pub struct LearnableMove {
-        #[n(0)] id: u16,
-        #[n(1)] condition: LearnCondition,
+        #[n(0)] pub id: u16,
+        #[n(1)] pub condition: LearnCondition,
     }
 
-    #[derive(Encode, Decode, Debug)]
+    #[derive(Encode, Decode, Debug, Copy, Clone)]
     pub enum LearnCondition {
         #[n(0)] LevelUp {
             #[n(0)] level: u8
@@ -81,39 +86,39 @@ pub mod pokedex {
 
     #[derive(Encode, Decode, Debug)]
     pub struct Move {
-        #[n(0)] id: u16,
-        #[n(1)] name: [char; 12],
+        #[n(0)] pub id: u16,
+        #[n(1)] pub name: [char; 12],
 
-        #[n(2)] type_: Type,
-        #[n(3)] damage_class: DamageClass,
-        #[n(4)] target: Target,
+        #[n(2)] pub type_: Type,
+        #[n(3)] pub damage_class: DamageClass,
+        #[n(4)] pub target: Target,
 
-        #[n(5)] accuracy: u8,
-        #[n(6)] power: u8,
-        #[n(7)] pp: u8,
-        #[n(8)] priority: u8,
+        #[n(5)] pub accuracy: u8,
+        #[n(6)] pub power: u8,
+        #[n(7)] pub pp: u8,
+        #[n(8)] pub priority: u8,
 
-        #[n(9)] parameters: Parameters,
-        #[n(10)] stat_changes: [Option<StatChange>; 2]
+        #[n(9)] pub parameters: Parameters,
+        #[n(10)] pub stat_changes: [Option<StatChange>; 2]
     }
 
     #[derive(Encode, Decode, Debug)]
     #[cbor(map)]
     pub struct Parameters {
-        #[n(0)] ailment: Option<AilmentParameter>,
-        #[n(1)] crit_rate: u8,
-        #[n(2)] drain: u8,
-        #[n(3)] flinch_chance: u8,
-        #[n(4)] healing: u8,
-        #[n(5)] stat_chance: u8,
-        #[n(6)] turn_range: Option<ParameterRange>,
-        #[n(7)] hit_range: Option<ParameterRange>,
+        #[n(0)] pub ailment: Option<AilmentParameter>,
+        #[n(1)] pub crit_rate: u8,
+        #[n(2)] pub drain: u8,
+        #[n(3)] pub flinch_chance: u8,
+        #[n(4)] pub healing: u8,
+        #[n(5)] pub stat_chance: u8,
+        #[n(6)] pub turn_range: Option<ParameterRange>,
+        #[n(7)] pub hit_range: Option<ParameterRange>,
     }
 
     #[derive(Encode, Decode, Debug)]
     pub struct AilmentParameter {
-        #[n(0)] ailment: AilmentType,
-        #[n(1)] chance: u8,
+        #[n(0)] pub ailment: AilmentType,
+        #[n(1)] pub chance: u8,
     }
 
     #[derive(Encode, Decode, Debug)]
@@ -132,8 +137,8 @@ pub mod pokedex {
 
     #[derive(Encode, Decode, Debug)]
     pub struct ParameterRange {
-        #[n(0)] min: u8,
-        #[n(1)] max: u8,
+        #[n(0)] pub min: u8,
+        #[n(1)] pub max: u8,
     }
 
     #[derive(Encode, Decode, Debug)]
@@ -159,7 +164,7 @@ pub mod pokedex {
 
     #[derive(Encode, Decode, Debug)]
     pub struct StatChange {
-        #[n(0)] amount: u8,
-        #[n(1)] stat: Stat,
+        #[n(0)] pub amount: u8,
+        #[n(1)] pub stat: Stat,
     }
 }
