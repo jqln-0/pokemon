@@ -6,7 +6,8 @@ use pokemon::pokedex::{
 use serde_json::Value;
 use std::collections::HashMap;
 use std::fs::read_dir;
-use std::io::{prelude::*, BufReader, BufWriter};
+use std::io::{prelude::*, BufReader, BufWriter, Cursor};
+use std::path::PathBuf;
 use std::{env, fs::File};
 
 #[derive(Debug)]
@@ -20,22 +21,42 @@ fn main() {
         return;
     }
 
-    let output_file = BufWriter::new(File::create(&args[2]).unwrap());
-    let mut cbor_writer = Writer::new(output_file);
+    let mut files: Vec<PathBuf> = read_dir(&args[1])
+        .unwrap()
+        .filter(|f| {
+            f.as_ref()
+                .unwrap()
+                .path()
+                .extension()
+                .and_then(|ext| ext.to_str())
+                .unwrap_or("")
+                == "json"
+        })
+        .map(|d| d.unwrap().path())
+        .collect();
 
-    let files = read_dir(&args[1]).unwrap();
-    for f in files {
-        let path = match f.ok().map(|f| f.path()) {
-            Some(p) => p,
-            None => continue,
-        };
+    files.sort_by_key(|a| {
+        a.file_stem()
+            .and_then(|i| i.to_str())
+            .and_then(|i| i.parse::<u32>().ok())
+    });
+
+    let mut table: Vec<(u32, u32)> = Vec::new();
+    table.push((0xdeadbeef, 0xcafebabe));
+    let data_buffer: Vec<u8> = Vec::new();
+    let mut cursor = Cursor::new(data_buffer);
+
+    for path in files {
         let json_filename = match path.extension().and_then(|ext| ext.to_str()) {
             Some("json") => path,
             _ => continue,
         };
         let bmp_filename = json_filename.with_extension("bmp");
 
-        print!("\rprocessing {:?} and {:?}     ", json_filename, bmp_filename);
+        print!(
+            "\rprocessing {:?} and {:?}     ",
+            json_filename, bmp_filename
+        );
         let mut bmp_file = File::open(bmp_filename).unwrap();
         let mut buffer = [0u8; 578];
         bmp_file.read_exact(&mut buffer).unwrap();
@@ -46,12 +67,37 @@ fn main() {
         let pokemon = parse_pokemon(&json, &buffer).unwrap();
         let move_list = parse_movelist(&json["moves"]).unwrap();
 
-        cbor_writer.write(pokemon).unwrap();
-        cbor_writer.write(move_list).unwrap();
+        let initial_position = cursor.position();
+        minicbor::encode(pokemon, &mut cursor).unwrap();
+        let pokemon_size = cursor.position() - initial_position;
+        {
+            let mut length_delimited_encoder = Writer::new(&mut cursor);
+            for chunk in move_list {
+                length_delimited_encoder.write(chunk).unwrap();
+            }
+        }
+        table.push((
+            initial_position.try_into().unwrap(),
+            pokemon_size.try_into().unwrap(),
+        ));
     }
     println!();
 
-    println!("wrote all pokemon!");
+    let table_size: u32 = (table.len() * 8).try_into().unwrap();
+    println!("All data parsed. Table size {} bytes", table_size);
+
+    let mut output_file = BufWriter::new(File::create(&args[2]).unwrap());
+    for (i, row) in table.iter().enumerate() {
+        let (mut offset, size) = row;
+        if i > 0 {
+            offset += table_size;
+        }
+        output_file.write(&offset.to_be_bytes()).unwrap();
+        output_file.write(&size.to_be_bytes()).unwrap();
+    }
+    output_file.write_all(&cursor.into_inner()).unwrap();
+
+    println!("Finished!");
 }
 
 fn parse_movelist(json: &Value) -> Result<Vec<MoveListChunk>, ParseError> {
@@ -82,12 +128,6 @@ fn parse_movelist(json: &Value) -> Result<Vec<MoveListChunk>, ParseError> {
     if current_chunk_i == 0 && all_chunks.len() == 0 {
         return Err(ParseError("no moves in movelist".to_string()));
     }
-
-    // Finish the final chunk.
-    all_chunks.push(MoveListChunk {
-        is_final_chunk: true,
-        moves: current_chunk,
-    });
 
     return Ok(all_chunks);
 }
