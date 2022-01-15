@@ -6,7 +6,7 @@ pub mod pokedex {
     #[derive(Encode, Decode, Debug)]
     pub struct Pokemon {
         #[n(0)] pub id: u8,
-        #[n(1)] pub name: [char; 12],
+        #[n(1)] pub name: [u8; 12],
         #[n(2)] pub type_primary: Type,
         #[n(3)] pub type_secondary: Option<Type>,
 
@@ -20,7 +20,7 @@ pub mod pokedex {
         #[n(11)] pub special_defense: StatData,
         #[n(12)] pub speed: StatData,
 
-        #[b(13)] pub sprite: ByteArray<578>,
+        #[n(13)] pub sprite: ByteArray<578>,
     }
 
     #[derive(Encode, Decode, Debug)]

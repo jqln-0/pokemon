@@ -4,6 +4,7 @@ use pokemon::pokedex::{
     self, LearnCondition, LearnableMove, Move, MoveListChunk, Pokemon, StatData, Type,
 };
 use serde_json::Value;
+use std::ascii::AsciiExt;
 use std::collections::HashMap;
 use std::fs::read_dir;
 use std::io::{prelude::*, BufReader, BufWriter, Cursor};
@@ -182,11 +183,10 @@ fn parse_move(json: Value) -> Result<Move, &'static str> {
 fn parse_pokemon(json: &Value, bitmap: &[u8; 578]) -> Result<Pokemon, &'static str> {
     let name = match json["name"].as_str() {
         Some(n) => {
-            let mut i = 0;
-            let mut name = ['\0'; 12];
-            for c in n.chars() {
-                name[i] = c;
-                i += 1;
+            let mut name = [08; 12];
+            let tmp = n.as_bytes();
+            for (i, c) in tmp.iter().enumerate() {
+                name[i] = c.to_ascii_uppercase();
             }
             name
         }
