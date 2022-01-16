@@ -1,7 +1,7 @@
 use minicbor::bytes::ByteArray;
 use minicbor_io::Writer;
 use pokemon::pokedex::{
-    self, LearnCondition, LearnableMove, Move, MoveListChunk, Pokemon, StatData, Type,
+    self, LearnCondition, LearnableMove, Move, MoveListChunk, PokemonSpecies, SpeciesStatData, Type,
 };
 use serde_json::Value;
 use std::ascii::AsciiExt;
@@ -150,8 +150,8 @@ fn parse_learnable_move(json: &Value) -> Result<Vec<LearnableMove>, ParseError> 
         moves.push(LearnableMove {
             id,
             condition: match method["move_learn_method"].as_str() {
-                Some("level-up") => LearnCondition::LevelUp {
-                    level: match method["level_learned_at"]
+                Some("level-up") => LearnCondition::LevelUp(
+                    match method["level_learned_at"]
                         .as_u64()
                         .map(|i| u8::try_from(i).ok())
                         .flatten()
@@ -163,13 +163,14 @@ fn parse_learnable_move(json: &Value) -> Result<Vec<LearnableMove>, ParseError> 
                             ))
                         }
                     },
-                },
+                ),
                 Some("machine") => LearnCondition::Machine,
                 Some(m) => return Err(ParseError(format!("unknown learn method {}", m))),
                 None => return Err(ParseError("missing learn method".to_string())),
             },
         })
     }
+    // TODO: sort moves by level before returning.
     return match moves.len() {
         0 => Err(ParseError("move had no learn methods".to_string())),
         _ => Ok(moves),
@@ -180,7 +181,7 @@ fn parse_move(json: Value) -> Result<Move, &'static str> {
     return Err("uh oh");
 }
 
-fn parse_pokemon(json: &Value, bitmap: &[u8; 578]) -> Result<Pokemon, &'static str> {
+fn parse_pokemon(json: &Value, bitmap: &[u8; 578]) -> Result<PokemonSpecies, &'static str> {
     let name = match json["name"].as_str() {
         Some(n) => {
             let mut name = [08; 12];
@@ -223,7 +224,7 @@ fn parse_pokemon(json: &Value, bitmap: &[u8; 578]) -> Result<Pokemon, &'static s
         None => return Err("missing stats"),
     };
 
-    Ok(pokedex::Pokemon {
+    Ok(pokedex::PokemonSpecies {
         id: match parse_as_u8(&json["id"]) {
             Some(i) => i,
             None => return Err("missing id"),
@@ -262,14 +263,21 @@ fn parse_as_u8(json: &Value) -> Option<u8> {
     };
 }
 
-fn parse_as_stat_data(json: &Value) -> Option<(&str, StatData)> {
+fn parse_as_stat_data(json: &Value) -> Option<(&str, SpeciesStatData)> {
     Some((
         match json["stat"].as_str() {
             Some(i) => i,
             None => return None,
         },
-        StatData {
+        SpeciesStatData {
             base_value: match json["base_stat"].as_u64().map(|i| u16::try_from(i)) {
+                Some(i) => match i {
+                    Ok(i) => i,
+                    Err(_) => return None,
+                },
+                None => return None,
+            },
+            effort_value_yield: match json["effort"].as_u64().map(|i| u8::try_from(i)) {
                 Some(i) => match i {
                     Ok(i) => i,
                     Err(_) => return None,

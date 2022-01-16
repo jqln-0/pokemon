@@ -2,30 +2,57 @@
 
 pub mod pokedex {
     use minicbor::{Encode, Decode, bytes::ByteArray};
-
+    
     #[derive(Encode, Decode, Debug)]
     pub struct Pokemon {
+        #[n(0)] pub species_id: u8,
+        #[n(1)] pub nickname: Option<[u8; 12]>,
+
+        #[n(2)] pub level: u8,
+        #[n(3)] pub xp: u16,
+        #[n(5)] pub current_hp: u16,
+
+        #[n(6)] pub hp: StatData,
+        #[n(7)] pub attack: StatData,
+        #[n(8)] pub defense: StatData,
+        #[n(9)] pub special_attack: StatData,
+        #[n(10)] pub special_defense: StatData,
+        #[n(11)] pub speed: StatData,
+
+        #[n(12)] pub moves: [Option<u16>; 4],
+    }
+
+    #[derive(Encode, Decode, Debug, Clone, Copy)]
+    pub struct StatData {
+        #[n(0)] pub value: u16,
+        #[n(2)] pub effort_value: u16,
+        #[n(3)] pub individual_value: u8,
+    }
+
+    #[derive(Encode, Decode, Debug)]
+    pub struct PokemonSpecies {
         #[n(0)] pub id: u8,
         #[n(1)] pub name: [u8; 12],
         #[n(2)] pub type_primary: Type,
         #[n(3)] pub type_secondary: Option<Type>,
+        #[n(14)] pub growth_rate: GrowthRate,
 
         #[n(4)] pub capture_rate: u8,
         #[n(5)] pub base_experience: u8,
 
-        #[n(7)] pub hp: StatData,
-        #[n(8)] pub attack: StatData,
-        #[n(9)] pub defense: StatData,
-        #[n(10)] pub special_attack: StatData,
-        #[n(11)] pub special_defense: StatData,
-        #[n(12)] pub speed: StatData,
+        #[n(7)] pub hp: SpeciesStatData,
+        #[n(8)] pub attack: SpeciesStatData,
+        #[n(9)] pub defense: SpeciesStatData,
+        #[n(10)] pub special_attack: SpeciesStatData,
+        #[n(11)] pub special_defense: SpeciesStatData,
+        #[n(12)] pub speed: SpeciesStatData,
 
         #[n(13)] pub sprite: ByteArray<578>,
     }
 
     #[derive(Encode, Decode, Debug)]
     #[cbor(index_only)]
-    pub enum Stat {
+    pub enum Stats {
         #[n(0)] Hp,
         #[n(1)] Attack,
         #[n(2)] Defense,
@@ -35,8 +62,32 @@ pub mod pokedex {
     }
 
     #[derive(Encode, Decode, Debug, Clone, Copy)]
-    pub struct StatData {
-        #[n(1)] pub base_value: u16,
+    pub struct SpeciesStatData {
+        #[n(0)] pub base_value: u16,
+        #[n(1)] pub effort_value_yield: u8,
+    }
+
+    #[derive(Encode, Decode, Debug, Clone, Copy)]
+    pub enum GrowthRate {
+        #[n(0)] ERRATIC,
+        #[n(1)] FAST,
+        #[n(2)] MEDIUM_FAST,
+        #[n(3)] MEDIUM_SLOW,
+        #[n(4)] SLOW,
+        #[n(5)] FLUCTUATING
+    }
+
+    impl GrowthRate {
+        fn xp_for_level(&self, level: u8) {
+            match self {
+                GrowthRate::ERRATIC => todo!(),
+                GrowthRate::FAST => todo!(),
+                GrowthRate::MEDIUM_FAST => todo!(),
+                GrowthRate::MEDIUM_SLOW => todo!(),
+                GrowthRate::SLOW => todo!(),
+                GrowthRate::FLUCTUATING => todo!(),
+            }
+        }
     }
 
     // These could be created dynamically from the JSON data. This isn't so bad
@@ -103,16 +154,14 @@ pub mod pokedex {
 
     #[derive(Encode, Decode, Debug, Copy, Clone)]
     pub enum LearnCondition {
-        #[n(0)] LevelUp {
-            #[n(0)] level: u8
-        },
+        #[n(0)] LevelUp(#[n(0)] u8),
         #[n(1)] Machine,
     }
 
     #[derive(Encode, Decode, Debug)]
     pub struct Move {
         #[n(0)] pub id: u16,
-        #[n(1)] pub name: [char; 12],
+        #[n(1)] pub name: [u8; 12],
 
         #[n(2)] pub type_: Type,
         #[n(3)] pub damage_class: DamageClass,
@@ -190,6 +239,66 @@ pub mod pokedex {
     #[derive(Encode, Decode, Debug)]
     pub struct StatChange {
         #[n(0)] pub amount: u8,
-        #[n(1)] pub stat: Stat,
+        #[n(1)] pub stat: Stats,
+    }
+}
+
+pub mod generation {
+    use crate::pokedex::{Pokemon, PokemonSpecies, StatData, SpeciesStatData, StatChange, LearnableMove, LearnCondition};
+
+    trait Random {
+        fn random(&self) -> u8;
+
+        fn generate_iv(&self) -> u8 {
+            return self.random() & 0b00011111;
+        }
+    }
+
+    pub fn generate_pokemon(species: PokemonSpecies, move_list: &mut dyn Iterator<Item = &LearnableMove>, level: u8, rng: &dyn Random) -> Pokemon {
+        let mut moves = [None; 4];
+        let mut i = 0;
+        for m in move_list {
+            if let LearnCondition::LevelUp(lvl) = m.condition {
+                if lvl > level {
+                    break;
+                }
+                moves[i] = Some(m.id);
+                i = (i + 1) % 4;
+            }
+        }
+
+        let hp_iv = rng.generate_iv();
+        let hp = StatData {
+            value: calculate_hp_stat(species.hp.base_value, 0, hp_iv, level),
+            effort_value: 0,
+            individual_value: hp_iv
+        };
+        return Pokemon{
+            species_id: species.id,
+            nickname: None,
+            level,
+            xp: species.growth_rate.xp_for_level(level),
+            current_hp: hp.value,
+            hp,
+            attack: new_stat(species.attack, level, rng),
+            defense: new_stat(species.defense, level, rng),
+            special_attack: new_stat(species.special_attack, level, rng),
+            special_defense: new_stat(species.special_defense, level, rng),
+            speed: new_stat(species.speed, level, rng),
+            moves
+        }
+    }
+
+    fn new_stat(stat: SpeciesStatData, level: u8, rng: &dyn Random) -> StatData {
+        let iv = rng.generate_iv();
+        return StatData { value: calculate_stat(stat.base_value, 0, iv, level), effort_value: 0, individual_value: iv }
+    }
+
+    fn calculate_stat(base: u16, ev: u16, iv: u8, level: u8) -> u16 {
+        return (((2 * base) + (iv as u16) + ev) * (level as u16) / 100) + 5
+    }
+
+    fn calculate_hp_stat(base: u16, ev: u16, iv: u8, level: u8) -> u16 {
+        return (((2 * base) + (iv as u16) + ev) * (level as u16) / 100) + (level as u16) + 10
     }
 }

@@ -22,7 +22,7 @@ use esp8266_hal::time::{KiloHertz, Nanoseconds};
 use esp8266_hal::timer::Timer1;
 use minicbor::decode;
 use panic_halt as _;
-use pokemon::pokedex::Pokemon;
+use pokemon::pokedex::PokemonSpecies;
 use sh1106::{prelude::*, Builder};
 use tinybmp::Bmp;
 
@@ -164,7 +164,7 @@ fn main() -> ! {
     display.flush().ok();
 
     let mut pokemon_id = 1;
-    let mut pokemon: Pokemon;
+    let mut pokemon: PokemonSpecies;
     let mut has_drawn = false;
     loop {
         btn_left = update_buttons(
@@ -277,7 +277,7 @@ const DATA_BUFFER_SIZE: usize = 2048;
 #[derive(Debug)]
 struct ReadError(&'static str);
 
-fn read_pokemon(id: u8, flash: &mut ESPFlash) -> Result<Pokemon, ReadError> {
+fn read_pokemon(id: u8, flash: &mut ESPFlash) -> Result<PokemonSpecies, ReadError> {
     // First read this id's row in the lookup table.
     let mut table_entry = [0u8; 8];
     let row_offset = match DATA_OFFSET.checked_add(u32::from(id) * 8) {
