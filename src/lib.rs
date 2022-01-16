@@ -64,6 +64,31 @@ pub mod pokedex {
         #[n(17)] Fairy,
     }
 
+    impl Type {
+        pub fn name(&self) -> &'static str {
+            match self {
+                Type::Normal => "NORMAL",
+                Type::Fighting => "FIGHTING",
+                Type::Flying => "FLYING",
+                Type::Poison => "POISON",
+                Type::Ground => "GROUND",
+                Type::Rock => "ROCK",
+                Type::Bug => "BUG",
+                Type::Ghost => "GHOST",
+                Type::Steel => "STEEL",
+                Type::Fire => "FIRE",
+                Type::Water => "WATER",
+                Type::Grass => "GRASS",
+                Type::Electric => "ELECTRIC",
+                Type::Psychic => "PSYCHIC",
+                Type::Ice => "ICE",
+                Type::Dragon => "DRAGON",
+                Type::Dark => "DARK",
+                Type::Fairy => "FAIRY"
+            }
+        }
+    }
+
     #[derive(Encode, Decode, Debug)]
     pub struct MoveListChunk {
         #[n(0)] pub is_final_chunk: bool,

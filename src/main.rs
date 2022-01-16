@@ -4,6 +4,7 @@
 extern crate nb;
 
 use bitbang_hal;
+use embedded_graphics::{egrectangle, egtext, egline};
 use embedded_graphics::fonts::Text;
 use embedded_graphics::image::Image;
 use embedded_graphics::primitives::Rectangle;
@@ -147,11 +148,17 @@ fn main() -> ! {
     display.init().unwrap();
     display.flush().ok();
 
-    let clear_style = PrimitiveStyleBuilder::new()
+    let black_solid = PrimitiveStyleBuilder::new()
         .fill_color(BinaryColor::Off)
         .build();
-    let text_style = TextStyleBuilder::new(FontPico)
+    let white_solid = PrimitiveStyleBuilder::new()
+        .fill_color(BinaryColor::On)
+        .build();
+    let white_text = TextStyleBuilder::new(FontPico)
         .text_color(BinaryColor::On)
+        .build();
+    let black_text = TextStyleBuilder::new(FontPico)
+        .text_color(BinaryColor::Off)
         .build();
 
     display.flush().ok();
@@ -179,32 +186,52 @@ fn main() -> ! {
         }
 
         if !has_drawn {
-            Rectangle::new(Point::new(0, 0), Point::new(60, 60)).into_styled(clear_style).draw(&mut display).ok();
-
             has_drawn = true;
+            egrectangle!(top_left = (0, 0), bottom_right = (128, 64), style = black_solid).draw(&mut display).ok();
+
             let res = read_pokemon(pokemon_id, &mut storage);
             if res.is_err() {
                 Text::new("ERROR", Point::new(0, 0))
-                    .into_styled(text_style)
+                    .into_styled(white_text)
                     .draw(&mut display)
                     .ok();
                 let ReadError(text) = res.err().unwrap();
                 Text::new(text, Point::new(0, 6))
-                    .into_styled(text_style)
+                    .into_styled(white_text)
                     .draw(&mut display)
                     .ok();
                 display.flush().ok();
                 continue;
             }
-
             pokemon = res.unwrap();
-            Text::new(core::str::from_utf8(&pokemon.name).unwrap(), Point::new(0, 0))
-                .into_styled(text_style)
-                .draw(&mut display)
-                .ok();
+
+            egrectangle!(top_left = (0, 0), bottom_right = (128, 6), style = white_solid).draw(&mut display).ok();
+            egtext!(text = core::str::from_utf8(&pokemon.name).unwrap(), top_left = (1, 1), style = black_text).draw(&mut display).ok();
+            egline!(start = (57, 7), end = (57, 64), style = white_solid).draw(&mut display).ok();
+
+            egtext!(text = pokemon.type_primary.name(), top_left = (58, 10), style = white_text).draw(&mut display).ok();
+            pokemon.type_secondary.and_then(|t| egtext!(text = t.name(), top_left = (58, 16), style = white_text).draw(&mut display).ok());
+
+            egtext!(text = "HP", top_left = (58, 28), style = white_text).draw(&mut display).ok();
+            egtext!(text = "ATK", top_left = (58, 36), style = white_text).draw(&mut display).ok();
+            egtext!(text = "DEF", top_left = (58, 44), style = white_text).draw(&mut display).ok();
+            egtext!(text = "SPD", top_left = (93, 28), style = white_text).draw(&mut display).ok();
+            egtext!(text = "SATK", top_left = (93, 36), style = white_text).draw(&mut display).ok();
+            egtext!(text = "SDEF", top_left = (93, 44), style = white_text).draw(&mut display).ok();
+
+            egtext!(text = core::str::from_utf8(&num_to_str(pokemon.hp.base_value.into())).unwrap(), top_left = (75, 28), style = white_text).draw(&mut display).ok();
+            egtext!(text = core::str::from_utf8(&num_to_str(pokemon.attack.base_value.into())).unwrap(), top_left = (75, 36), style = white_text).draw(&mut display).ok();
+            egtext!(text = core::str::from_utf8(&num_to_str(pokemon.defense.base_value.into())).unwrap(), top_left = (75, 44), style = white_text).draw(&mut display).ok();
+            egtext!(text = core::str::from_utf8(&num_to_str(pokemon.speed.base_value.into())).unwrap(), top_left = (113, 28), style = white_text).draw(&mut display).ok();
+            egtext!(text = core::str::from_utf8(&num_to_str(pokemon.special_attack.base_value.into())).unwrap(), top_left = (113, 36), style = white_text).draw(&mut display).ok();
+            egtext!(text = core::str::from_utf8(&num_to_str(pokemon.special_defense.base_value.into())).unwrap(), top_left = (113, 44), style = white_text).draw(&mut display).ok();
+
+            egrectangle!(top_left = (56, 57), bottom_right = (128, 64), style = white_solid).draw(&mut display).ok();
+            egtext!(text = "A:MOVES    B:BACK", top_left = (58, 58), style = black_text).draw(&mut display).ok();
+
             let image = Bmp::from_slice(pokemon.sprite.as_ref()).unwrap();
             let mut real_image = Image::new(&image, Point::zero());
-            real_image.translate_mut(Point::new(0,6));
+            real_image.translate_mut(Point::new(0, 7));
             real_image.draw(&mut display).ok();
             display.flush().ok();
             timer1.delay_ms(200);
@@ -222,6 +249,26 @@ fn main() -> ! {
             show_colour(&mut timer1, &mut neopixel, 0x00, 0x00, 0x0f);
         }
     } */
+}
+
+fn num_to_str(mut num: u32) -> [u8; 3] {
+    let mut buf = [0u8; 3];
+    let mut base: u32 = 100;
+    let mut index_modifier = 0;
+    let mut has_non_zero = false;
+
+    for i in 0..3 {
+        let digit: u8 = (num / base).try_into().unwrap();
+        if digit == 0 && !has_non_zero {
+            index_modifier += 1;
+        } else {
+            has_non_zero = true;
+            buf[i - index_modifier] = digit + 48u8; // trust me babe :)
+        }
+        num %= base;
+        base /= 10;
+    }
+    return buf
 }
 
 const DATA_OFFSET: u32 = 0x200000;
